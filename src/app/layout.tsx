@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ClerkProvider, SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
+import { ClerkProvider, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
 

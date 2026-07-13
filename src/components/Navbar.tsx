@@ -5,7 +5,7 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
-import { SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const NAV_LINKS = [
   { name: "Home", href: "#" },
@@ -55,7 +55,7 @@ export function Navbar() {
             ))}
           </ul>
           <div className="flex items-center gap-4">
-            <Show when="signed-out">
+            <SignedOut>
               <SignInButton mode="modal">
                 <button className="text-sm font-medium text-foreground/80 hover:text-brand-accent transition-colors">
                   Sign In
@@ -66,10 +66,10 @@ export function Navbar() {
                   Sign Up
                 </button>
               </SignUpButton>
-            </Show>
-            <Show when="signed-in">
+            </SignedOut>
+            <SignedIn>
               <UserButton />
-            </Show>
+            </SignedIn>
           </div>
         </nav>
 
@@ -101,7 +101,7 @@ export function Navbar() {
             </Link>
           ))}
           <div className="mt-6 flex flex-col gap-4">
-            <Show when="signed-out">
+            <SignedOut>
               <SignInButton mode="modal">
                 <button className="w-full py-3 rounded-full border border-foreground/20 text-center font-medium">
                   Sign In
@@ -112,12 +112,12 @@ export function Navbar() {
                   Sign Up
                 </button>
               </SignUpButton>
-            </Show>
-            <Show when="signed-in">
+            </SignedOut>
+            <SignedIn>
               <div className="flex justify-center mt-2">
                 <UserButton />
               </div>
-            </Show>
+            </SignedIn>
           </div>
         </motion.div>
       )}
