@@ -25,11 +25,21 @@ export function Footer() {
           </a>
 
           <div className="flex gap-4">
-            <Link href="#" className="p-3 rounded-full bg-background border border-border hover:border-brand-accent hover:text-brand-accent transition-all hover:-translate-y-1">
+            <Link 
+              href="https://www.linkedin.com/in/aniket-ninawe-4bb503388/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="p-3 rounded-full bg-background border border-border hover:border-brand-accent hover:text-brand-accent transition-all hover:-translate-y-1"
+            >
               <FaLinkedin className="w-5 h-5" />
               <span className="sr-only">LinkedIn</span>
             </Link>
-            <Link href="#" className="p-3 rounded-full bg-background border border-border hover:border-brand-accent hover:text-brand-accent transition-all hover:-translate-y-1">
+            <Link 
+              href="https://x.com/aniketninawez" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="p-3 rounded-full bg-background border border-border hover:border-brand-accent hover:text-brand-accent transition-all hover:-translate-y-1"
+            >
               <FaTwitter className="w-5 h-5" />
               <span className="sr-only">Twitter</span>
             </Link>

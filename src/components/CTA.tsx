@@ -38,7 +38,7 @@ export function CTA() {
   };
 
   return (
-    <section className="py-32 relative overflow-hidden bg-background">
+    <section id="cta" className="py-32 relative overflow-hidden bg-background">
       {/* Animated Glow Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
         <motion.div

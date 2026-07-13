@@ -37,7 +37,7 @@ export function Navbar() {
     >
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="text-xl font-bold tracking-tighter">
-          Aniket Ninawe
+          ANIKS
         </Link>
 
         {/* Desktop Nav */}

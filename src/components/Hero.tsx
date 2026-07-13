@@ -4,22 +4,25 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { TextReveal } from "./ui/TextReveal";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useLenis } from "lenis/react";
 import { ArrowRight, BrainCircuit, Network } from "lucide-react";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-24 pb-12"
+      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-32 pb-24"
     >
       {/* Animated Mesh Gradient Background */}
       <div className="absolute inset-0 -z-10 bg-background overflow-hidden">
@@ -45,6 +48,22 @@ export function Hero() {
 
       <motion.div style={{ y, opacity }} className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", type: "spring", bounce: 0.4 }}
+            className="relative w-32 h-32 md:w-40 md:h-40 mb-8 rounded-full overflow-hidden border-4 border-background shadow-2xl ring-4 ring-brand-primary/20"
+          >
+            <Image 
+              src="/img4.png" 
+              alt="Aniket Ninawe" 
+              fill 
+              className="object-cover"
+              priority
+            />
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -79,14 +98,7 @@ export function Hero() {
               Data Scientist | AI & LLM Developer | Pipeline Architect
             </motion.p>
             
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.0 }}
-              className="text-lg md:text-xl text-foreground/90 leading-relaxed"
-            >
-              Connecting Large Language Models to real-world data to build automated, intelligent systems.
-            </motion.p>
+
           </div>
 
           <motion.div
@@ -95,20 +107,30 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 1 }}
             className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full"
           >
-            <Link
+            <a
               href="#projects"
-              className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-primary text-background rounded-full font-medium overflow-hidden shadow-xl shadow-brand-primary/20 hover:scale-105 transition-all"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-primary text-background rounded-full font-medium overflow-hidden shadow-xl shadow-brand-primary/20 hover:scale-105 active:scale-95 transition-all"
             >
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
               <span className="relative">View Projects</span>
               <ArrowRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="#contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-surface border border-border rounded-full font-medium hover:bg-surface-hover hover:scale-105 transition-all"
+            </a>
+            <a
+              href="#cta"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("cta")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-foreground text-background rounded-full font-medium overflow-hidden shadow-xl hover:scale-105 active:scale-95 transition-all"
             >
-              Get in Touch
-            </Link>
+              <div className="absolute inset-0 bg-background/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+              <span className="relative">Start a Project</span>
+              <ArrowRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
           </motion.div>
         </div>
       </motion.div>
