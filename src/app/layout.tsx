@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aniks",
-  description: "Portfolio of Aniket Ninawe",
+  title: "Aniket Ninawe | Portfolio",
+  description: "Personal portfolio and work of Aniket Ninawe, showcasing projects, design, and development.",
 };
 
 export default function RootLayout({
