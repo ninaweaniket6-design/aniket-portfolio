@@ -5,7 +5,7 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/nextjs";
 
 const NAV_LINKS = [
   { name: "Home", href: "#" },
@@ -18,6 +18,7 @@ export function Navbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { isSignedIn } = useAuth();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
@@ -55,21 +56,23 @@ export function Navbar() {
             ))}
           </ul>
           <div className="flex items-center gap-4">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="text-sm font-medium text-foreground/80 hover:text-brand-accent transition-colors">
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <button className="px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-medium hover:scale-105 transition-transform shadow-lg shadow-foreground/10">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
+            {!isSignedIn && (
+              <>
+                <SignInButton mode="modal">
+                  <button className="text-sm font-medium text-foreground/80 hover:text-brand-accent transition-colors">
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button className="px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-medium hover:scale-105 transition-transform shadow-lg shadow-foreground/10">
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </>
+            )}
+            {isSignedIn && (
               <UserButton />
-            </SignedIn>
+            )}
           </div>
         </nav>
 
@@ -101,23 +104,25 @@ export function Navbar() {
             </Link>
           ))}
           <div className="mt-6 flex flex-col gap-4">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="w-full py-3 rounded-full border border-foreground/20 text-center font-medium">
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <button className="w-full py-3 rounded-full bg-brand-accent text-white text-center font-medium">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
+            {!isSignedIn && (
+              <>
+                <SignInButton mode="modal">
+                  <button className="w-full py-3 rounded-full border border-foreground/20 text-center font-medium">
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button className="w-full py-3 rounded-full bg-brand-accent text-white text-center font-medium">
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </>
+            )}
+            {isSignedIn && (
               <div className="flex justify-center mt-2">
                 <UserButton />
               </div>
-            </SignedIn>
+            )}
           </div>
         </motion.div>
       )}
